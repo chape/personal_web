@@ -1,4 +1,4 @@
-package chapter1.bean;
+package chapter1.bean.test;
 
 /**
  * Created by ChaoChao on 08/12/2017.
