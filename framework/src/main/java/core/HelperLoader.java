@@ -1,10 +1,7 @@
 package core;
 
 
-import core.helper.BeanHelper;
-import core.helper.ClassHelper;
-import core.helper.ControllerHelper;
-import core.helper.IocHelper;
+import core.helper.*;
 import core.util.ClassUtil;
 
 import java.util.Arrays;
@@ -14,10 +11,14 @@ import java.util.Arrays;
  */
 public class HelperLoader {
 
+    /**
+     * AopHelper一定要在IocHelper之前,不然IocHelper注入不了代理对象
+     */
     public static void init(){
         Class<?>[] classes = {
                 ClassHelper.class,
                 BeanHelper.class,
+                AopHelper.class,
                 IocHelper.class,
                 ControllerHelper.class,
         };

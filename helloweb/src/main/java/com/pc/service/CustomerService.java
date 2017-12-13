@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import core.annotation.Service;
+import core.annotation.Transaction;
 import core.helper.DatabaseHelper;
 import com.pc.model.Customer;
 
@@ -16,6 +17,7 @@ public class CustomerService {
     /**
      * 获取客户列表
      */
+    @Transaction
     public List<Customer> getCustomerList() {
         String sql = "SELECT * FROM customer";
         return DatabaseHelper.queryEntityList(Customer.class, sql);
@@ -32,6 +34,7 @@ public class CustomerService {
     /**
      * 创建客户
      */
+    @Transaction
     public boolean createCustomer(Map<String, Object> fieldMap) {
         return DatabaseHelper.insertEntity(Customer.class, fieldMap);
     }
@@ -39,6 +42,7 @@ public class CustomerService {
     /**
      * 更新客户
      */
+    @Transaction
     public boolean updateCustomer(long id, Map<String, Object> fieldMap) {
         return DatabaseHelper.updateEntity(Customer.class, id, fieldMap);
     }
@@ -46,6 +50,7 @@ public class CustomerService {
     /**
      * 删除客户
      */
+    @Transaction
     public boolean deleteCustomer(long id) {
         return DatabaseHelper.deleteEntity(Customer.class, id);
     }
