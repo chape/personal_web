@@ -25,7 +25,7 @@ public class CustomerController {
      * 进入 客户列表 界面
      */
     @Action("get:/customer")
-    public View index(Param param) {
+    public View index() {
         List<Customer> customerList = customerService.getCustomerList();
         return new View("customer.jsp").addModel("customerList", customerList);
     }
