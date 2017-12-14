@@ -98,6 +98,12 @@
             <artifactId>commons-codec</artifactId>
             <version>1.10</version>
         </dependency>
+        <!-- Shiro -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.2.3</version>
+        </dependency>
         <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>

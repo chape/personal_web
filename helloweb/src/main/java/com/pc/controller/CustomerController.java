@@ -53,7 +53,7 @@ public class CustomerController {
      */
     @Action("post:/customer_create")
     public Data createSubmit(Param param) {
-        Map<String, Object> fieldMap = param.getMap();
+        Map<String, Object> fieldMap = param.getFieldMap();
         boolean result = customerService.createCustomer(fieldMap);
         return new Data(result);
     }
@@ -74,7 +74,7 @@ public class CustomerController {
     @Action("put:/customer_edit")
     public Data editSubmit(Param param) {
         long id = param.getLong("id");
-        Map<String, Object> fieldMap = param.getMap();
+        Map<String, Object> fieldMap = param.getFieldMap();
         boolean result = customerService.updateCustomer(id, fieldMap);
         return new Data(result);
     }

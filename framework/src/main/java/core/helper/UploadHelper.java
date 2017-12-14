@@ -5,6 +5,7 @@ import core.bean.FormParam;
 import core.bean.Param;
 import core.util.CollectionUtil;
 import core.util.FileUtil;
+import core.util.StreamUtil;
 import core.util.StringUtil;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -14,8 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -88,5 +88,39 @@ public class UploadHelper {
             throw new RuntimeException(e);
         }
         return new Param(formParamList, fileParamList);
+    }
+
+    /**
+     * 上传单个文件
+     * @param basePath
+     * @param fileParam
+     */
+    public static void uploadFile(String basePath, FileParam fileParam) {
+
+        if(null == fileParam) {
+            return;
+        }
+        String filePath = basePath + fileParam.getFileName();
+        FileUtil.createFile(filePath);
+        InputStream inputStream = new BufferedInputStream(fileParam.getInputStream());
+        try {
+            OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(filePath));
+            StreamUtil.copyStream(inputStream, outputStream);
+        } catch (Exception e) {
+            LOGGER.error("upload file error", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 批量上传文件
+     * @param basePath
+     * @param fileParamList
+     */
+    public static void uploadFile(String basePath, List<FileParam> fileParamList) {
+        if(CollectionUtil.isEmpty(fileParamList)) {
+            return;
+        }
+        fileParamList.stream().forEach(fp -> uploadFile(basePath, fp));
     }
 }
